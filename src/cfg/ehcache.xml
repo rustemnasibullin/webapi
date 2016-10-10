@@ -1,0 +1,36 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd">
+
+    <diskStore path="_tmp"/>
+   
+    <cacheManagerPeerProviderFactory class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory" 
+    properties="peerDiscovery=automatic, multicastGroupAddress=230.0.0.1, multicastGroupPort=4446, timeToLive=32"/>
+
+
+    <cache name="ru.mtt.core.SystemCACHE"
+           maxElementsInMemory="15000000"
+           eternal="true"
+           timeToIdleSeconds="86400"
+           timeToLiveSeconds="0"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="30"
+           maxElementsOnDisk="100000000"
+           diskPersistent="true"
+           diskExpiryThreadIntervalSeconds="86400"
+           memoryStoreEvictionPolicy="LRU"
+           >
+
+           <cacheEventListenerFactory class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+                                      properties="replicateAsynchronously=true, replicatePuts=true, replicateUpdates=true,replicateUpdatesViaCopy=false, replicateRemovals=true "/>
+ 
+
+           <!-- persistence strategy="localRestartable" synchronousWrites="true"/ -->  <!--  Only for Enterprise Mode -->
+           <bootstrapCacheLoaderFactory class="net.sf.ehcache.store.DiskStoreBootstrapCacheLoaderFactory" properties="bootstrapAsynchronously=false, maximumChunkSizeBytes=5000000" propertySeparator="," />
+
+    </cache>
+
+
+
+
+</ehcache>
+

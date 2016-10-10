@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- START SNIPPET: e1 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <import resource="classpath:META-INF/webapibeans.xml"/>
+
+
+  <bean id="camelContextControllerMng" class="ru.mtt.webapi.camel.CamelStartUpListener" >
+        <property name="config" value="cfg/webapimng.properties"/>
+        <property name="camelContext" ref="webapimng" />
+  </bean>
+
+<!--
+  <bean id="camelContextLifecycleStrategy" class="ru.mtt.webapi.camel.CamelLifecycleStrategy" >
+        <property name="config" value="cfg/webapimng.properties"/>
+        <property name="camelContext" ref="webapimng" />
+  </bean>
+ --> 
+ 
+  <camelContext id="webapimng" xmlns="http://camel.apache.org/schema/spring"  threadNamePattern="X162-#counter#">
+ 
+    <threadPoolProfile id="xThreadPoolProfile" defaultProfile="true"
+                         poolSize="10" maxPoolSize="30" maxQueueSize="1000"
+                         rejectedPolicy="CallerRuns"/>
+
+    <route id="WebAPIManager">
+      <from uri="snmp:0.0.0.0:2762?protocol=udp&amp;type=TRAP"/>
+      <log loggingLevel="INFO" 
+           message="test"/>
+      <bean ref="SNMPProcessor" method="process"/>
+    </route>
+
+  </camelContext> 
+
+</beans>
+<!-- END SNIPPET: e1 -->

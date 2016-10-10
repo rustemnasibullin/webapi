@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.0.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    
+    <bean id="rcacheManagerFactory" class="ru.mtt.webapi.memcache.CacheManagerFactory" />
+
+    <bean id="rcacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" factory-bean="rcacheManagerFactory" factory-method="getCManagerInstance" >
+  
+    </bean>
+
+    <bean id="XCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" scope="singleton">
+        <property name="cacheManager">
+            <ref local="rcacheManager"/>
+        </property>
+        <property name="cacheName">
+            <value>ru.mtt.core.SystemCACHE</value>
+        </property>
+    </bean>
+
+    <bean id="SystemCache" class="ru.mtt.webapi.memcache.SystemCache" scope="singleton">
+        <property name="xCache" ref="XCache"/>
+    </bean>
+
+
+    <bean id="SNMPProcessor" class="ru.mtt.rservice.core.SNMPProcessor"/>
+
+
+
+</beans>
