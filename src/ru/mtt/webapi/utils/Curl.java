@@ -191,11 +191,15 @@ public class Curl extends Properties  {
              String data = Curl.this.getProperty(Curl.CURLOPT_POSTFIELDS);
              try {
                  
+                 
+               XUtils.ilog ("log/curl.log", "data: " + data); 
                Object v = cli.sendMessage(data.getBytes());
                x = new SimpleXSmartObject ("body", v);  
 
              } catch (Throwable ee) {
-               ee.printStackTrace();
+
+                 XUtils.ilog ("log/curl.log", XUtils.info(ee)); 
+
              }
            
        } else if (serviceUrl.startsWith("http")) {
@@ -203,7 +207,7 @@ public class Curl extends Properties  {
           Integer i = (Integer)  get(Curl.CURLOPT_POST);
           String meth = (String) getProperty(Curl.CURLOPT_METHOD, "GET");
           System.out.println(i + "  :  " + meth);
-          if (i != null && i.intValue()==1) {
+          if (i != null && i.intValue() == 1) {
               meth = "POST"; 
           }
 

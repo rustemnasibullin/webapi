@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 import ru.mtt.webapi.core.IProcessor;
+import ru.mtt.webapi.utils.XUtils;
 
 public class IOClient implements IProcessor {
     
@@ -52,6 +53,7 @@ public class IOClient implements IProcessor {
 
         byte[] bin = (byte[]) r;
 
+        XUtils.ilog ("log/curl.log", "host: "+host+" port: "+port); 
         fromserver = new Socket(host,port);
 
         fromserver.getOutputStream().write (bin);
