@@ -1,5 +1,6 @@
 package ru.mtt.webapi.core;
 
+import java.util.Collection;
 import java.util.Set;
 
 import ru.mtt.webapi.utils.XUtils;
@@ -12,23 +13,35 @@ import ru.mtt.webapi.utils.XUtils;
  */
 
 public class XMap extends XSmartObject {
+
+    String nameof = null;
+
     public XMap() {
         super();
     }
 
-
     @Override
     public Object getFieldByName(String name) throws WAPIException {
-        // TODO Implement this method
-        return null;
+        if ("#VALUES".equals(name)){
+          return this.values().iterator();
+        } else if ("#KEYS".equals(name)){
+              return this.keySet().iterator();
+        } else if ("NAME".equals(name)){
+              return nameof;
+        } else {
+          return this.get (name);
+        }
     }
 
     @Override
     public void setFieldByName(String name, Object value) throws WAPIException {
        
-       
-           this.put (name,value);
-
+           if ("NAME".equals(name)){
+                nameof = value.toString();
+           } else {
+                this.put (name,value);
+           }
+           
     }
 
     @Override

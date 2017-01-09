@@ -88,6 +88,7 @@ public class WebApiDispatcher implements MinaRequestHandler, WebApiDispatcherMBe
 
 
     public void registerEvent(String methName, long dur, long timeev, double af)  {
+           XUtils.ilog ("log/webapidispatcher.log", "info: " +methName + "/" + dur + "/" + timeev + "/" + af);
            sc.registerEvent(methName,dur, timeev, af);  
     }
 

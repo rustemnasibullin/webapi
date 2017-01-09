@@ -110,6 +110,19 @@ public abstract class XSmartObject extends LinkedHashMap implements IConstants, 
            return vo;
 
     };
+
+    public String getValueOfAsQString(String name) {
+        
+           Object val = getValueOf(name);
+           String vo = null;
+        
+           if (val instanceof String) {
+                vo = (String) val;
+           }
+           
+           return "'"+vo+"'";
+
+    };
     
     
     public void  setValueOf(String name,  Object value) {

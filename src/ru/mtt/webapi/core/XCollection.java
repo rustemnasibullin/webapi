@@ -140,7 +140,7 @@ public class XCollection extends XSmartObject {
                }
                
                XSmartObject value  =  null;
-               System.out.println (index);
+               System.out.println ("Ind:"+index);
                if (index<col.size()) {
                value = col.get(index);
                } else {

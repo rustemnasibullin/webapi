@@ -77,7 +77,7 @@ public class MQClient {
            
            XUtils.ilog("log/mqclient.log","Test: "+objMessage);
            try {
-           template.send(this.queue, new MessageCreator() {
+           template.send(new MessageCreator() {
            public Message createMessage(Session session) throws JMSException {
                   return session.createTextMessage(objMessage.toString());
            }

@@ -121,8 +121,9 @@ public class SimpleXSmartObject extends XSmartObject {
                return this.name;
            } else if (name.equals("VALUE")) {
                return val;
+           } else {
+               return this.get (name);
            }
-           return null;
     }
 
     @Override

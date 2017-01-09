@@ -716,7 +716,6 @@ public class XUtils {
     
     public static int copy (String f, OutputStream out) {
            
-           
         byte[] buffer = new byte[9096]; 
         int nt = 0;
         try {
@@ -732,19 +731,15 @@ public class XUtils {
             
         } catch (Throwable ee) {
             
-          ee.printStackTrace();   
+          XUtils.ilog ("log/_xutils_copy.log", XUtils.info (ee));   
           
         }
-        
         
         return nt;
         
     }
-    
-    
         
     public static void main001 (String[] a) {
-
       
         try {
             

@@ -412,8 +412,8 @@ public class Curl extends Properties  {
                     out.close();
             
                     int responseCode = con.getResponseCode();
-                    System.out.println("\nSending 'GET' request to URL : " + url);
-                    System.out.println("Response Code : " + responseCode);
+                    XUtils.ilog("log/curl.log","\nSending 'PUT' request to URL : " + url);
+                    XUtils.ilog("log/curl.log","Response Code : " + responseCode);
 
                     BufferedReader in = new BufferedReader(
                     new InputStreamReader(con.getInputStream(),"utf-8"));
@@ -426,12 +426,12 @@ public class Curl extends Properties  {
                     in.close();
 
                     //print result
-                    System.out.println(response.toString());
+                    XUtils.ilog("log/curl.log","Response: "+response.toString());
                     x = new SimpleXSmartObject ("body", response.toString());  
             
         } catch (Throwable ee) {
     
-            x = new SimpleXSmartObject ("error", "{\"Error\":\""+ee.getMessage()+"\"}");  
+            x = new SimpleXSmartObject ("error", "{\"Error\":\"" + ee.getMessage() + "\"}");  
             XUtils.ilog("log/curl.log", curl_info());
             XUtils.ilog("log/curl.log", XUtils.info(ee));
             

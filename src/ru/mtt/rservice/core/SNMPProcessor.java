@@ -1,10 +1,12 @@
 package ru.mtt.rservice.core;
 
+import ru.mtt.webapi.utils.XUtils;
+
 
 /**
  *  SNMP Message processing bean
- * 
- *  @author rnasibullin@mtt.ru  Chief 
+ *
+ *  @author rnasibullin@mtt.ru  Chief
  */
 
 
@@ -20,6 +22,8 @@ public class SNMPProcessor {
     public Object process(Object o) {
         
            co.parse(o);
+           
+           XUtils.ilog ("log/snmpproc.log", "SNMP: " +o + "/" + co);
            int evId = co.getEventId();
            switch (evId) {
            case MIBControlObject._SERVICESTARTED:
