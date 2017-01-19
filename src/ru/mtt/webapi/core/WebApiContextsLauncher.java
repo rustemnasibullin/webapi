@@ -131,16 +131,14 @@ public class WebApiContextsLauncher  extends Thread {
 
                         logger.info("starting context " + cnameCorrect);
                         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(cnameCorrect);
-                 //       context.setDisplayName(cnameCorrect);
                         contexts.add(context);
-
-
+                        XUtils.ilog ("launcher.log","Launch  APP Context: "+cnameCorrect);  
                         contexts_ids.add (cnameCorrect);
 
                     } catch (Throwable e) {
 
                         e.printStackTrace();
-               //         logger.error("failed to start context " + cnameCorrect, e);
+                        XUtils.ilog ("launcher.log","Launch  APP Context: "+XUtils.info(e));  
                         logger.info("shutting down server due to startup errors");
                         allContextsStarted = false;
                         break;
@@ -162,6 +160,7 @@ public class WebApiContextsLauncher  extends Thread {
         {
             // args[0] - contexts' names
 
+            XUtils.ilog ("launcher.log","Launch  APP Contexts: "+args[0]);  
 
             String arg = args[0];
 

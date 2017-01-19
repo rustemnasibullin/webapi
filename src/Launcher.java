@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 
 import ru.mtt.webapi.core.IConfigurableObject;
 import ru.mtt.webapi.core.XConfigurableObject;
+import ru.mtt.webapi.utils.XUtils;
 
 /**
  * User: Nasibullin Rustem
@@ -119,6 +120,12 @@ public class Launcher
         {
             String[] nserverArgs = new String[args.length - 1];
             System.arraycopy(args, 1, nserverArgs, 0, nserverArgs.length);
+
+
+            for (String xs: nserverArgs) {
+                 XUtils.ilog ("launche.log","Arg:"+xs);                  
+            }
+     
 
             try {
               main.invoke(null, (Object) nserverArgs);
