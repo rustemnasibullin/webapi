@@ -210,25 +210,24 @@ public class WebApiContextsLauncher  extends Thread {
             //   close  neo4j db server instnces:
 
             if (XUtils.hasDebugMode()) System.exit(0); 
-            System.out.println ("@Stop Command.");
-
+ 
             for (ClassPathXmlApplicationContext context : contexts)
             {
                 logger.info("stopping context " + context.getDisplayName());
                 try
                 {
+                    
                     context.close();
                     context.destroy();
                     logger.info("context " + context.getDisplayName() + " stopped successfuly");
+                    
                 } catch (Throwable e)
                 {
-                    
                     logger.error("failed to stop context " + context.getDisplayName(), e);
                 }
             }
             
-            SystemLogger.getInstance().warn("stop");
-            
+             
             if (shutdownSSocket != null)
                 try
                 {
@@ -243,15 +242,13 @@ public class WebApiContextsLauncher  extends Thread {
             
             
             
-            System.out.println ("@Commit WebApiContextsLauncher class.");
-            
             synchronized (WebApiContextsLauncher.class)
             {
                 WebApiContextsLauncher.class.notify();
             }
  
-            System.out.println ("@Exit");
-           
+            SystemLogger.getInstance().warn("stop");
+          
             System.exit(0);
             
         }
