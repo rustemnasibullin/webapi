@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import ru.mtt.rservice.core.SystemLogger;
 import ru.mtt.webapi.core.IConfigurableObject;
 import ru.mtt.webapi.core.XConfigurableObject;
 import ru.mtt.webapi.utils.XUtils;
@@ -46,7 +47,7 @@ public class Launcher
         Method main = nserver.getDeclaredMethod("main", argTypes);
 
 
-        logger.info("Loading libraries finishing \n________________________________");
+        logger.info("Loading libraries finishing \n");
 
         
         
@@ -92,7 +93,7 @@ public class Launcher
         if (!SHUTDOWN_COMMAND.equals(args[0])) XConfigurableObject._POSTFIX = args[0];
         urls.add(new URL("file:lib/logging/" + args[0] + "/"));
 
-        logger.info("Loading libraries\n________________________________");
+        logger.info("Loading libraries\n");
 
 
         File f = f = new File("lib");
@@ -108,9 +109,9 @@ public class Launcher
         Class<?> nserver = loader.loadClass("ru.mtt.webapi.core.WebApiContextsLauncher");
         Class[] argTypes = new Class[]{String[].class};
         Method main = nserver.getDeclaredMethod("main", argTypes);
+        SystemLogger.configurate();
 
-
-        logger.info("Loading libraries finishing \n________________________________");
+        logger.info("Loading libraries finishing \n");
 
 
         if (SHUTDOWN_COMMAND.equals(args[0]))
@@ -123,7 +124,7 @@ public class Launcher
 
 
             for (String xs: nserverArgs) {
-                 XUtils.ilog ("launche.log","Arg:"+xs);                  
+                 logger.info("Arg:"+xs);                  
             }
      
 
@@ -133,6 +134,9 @@ public class Launcher
               ee.printStackTrace();
             }
         }
+        
+        
+        
     }
 
     
@@ -141,7 +145,7 @@ public class Launcher
         
         public void info (Object data) {
             
-               System.out.println (">: "+data);
+               XUtils.plog ("_launcher.log", "> "+data);
             
         }
         

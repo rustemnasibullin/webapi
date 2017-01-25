@@ -2,10 +2,12 @@ package ru.mtt.rservice.core;
 
 import org.snmp4j.PDU;
 
+import ru.mtt.webapi.utils.XUtils;
+
 /**
  *  Service control data object container  and MIB parser
- * 
- *  @author rnasibullin@mtt.ru  Chief 
+ *
+ *  @author rnasibullin@mtt.ru  Chief
  */
 
 public class MIBControlObject {
@@ -28,14 +30,23 @@ public class MIBControlObject {
     }
     
     public void parse (Object o) {
+
+           String po = null;
         
-            String po = (String) o;
-            System.out.println (":" +po); 
+           if (o instanceof String) {
+               po = (String) o;
+           } else {
+           
+               XUtils.ilog ("log/snmpproc.log", "SNMP: " +o.getClass().getName());
+
+           }
+        
+           System.out.println (":" +po); 
             
-            String [] tags = po.split("[<>]");
-            boolean use_value = false;
-            boolean use_ip = false;
-            for (String c: tags) {
+           String [] tags = po.split("[<>]");
+           boolean use_value = false;
+           boolean use_ip = false;
+           for (String c: tags) {
                 
                  System.out.println (":" +c); 
                  if (c==null || c.length()==0) continue;
@@ -72,7 +83,7 @@ public class MIBControlObject {
                      }
                      
                  }
-            }
+           }
         
         
     }

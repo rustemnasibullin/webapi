@@ -30,6 +30,7 @@ import org.apache.mina.http.api.HttpEndOfContent;
 import org.apache.mina.http.api.HttpMethod;
 
 import ru.mtt.rservice.core.MIBControlObject;
+import ru.mtt.rservice.core.SystemLogger;
 import ru.mtt.webapi.core.XBUSConnector;
 import ru.mtt.webapi.core.XConfigurableObject;
 import ru.mtt.webapi.dispatcher.WebApiDispatcher;
@@ -60,6 +61,10 @@ public class HTTPMinaServer extends XConfigurableObject  {
     MinaRequestHandler  requestHandler = null;
     WebApiDispatcher dispatcher;
     DemuxingProtocolDecoder protocolDecoder =  null;
+    org.apache.log4j.Logger logger = Logger.getLogger(HTTPMinaServer.class);
+    SystemLogger rlogger = SystemLogger.getInstance();
+    int serverPort = 1001;
+    int n_threads = 16;
 
 
     public void setFlDispatch(boolean flDispatch) {
@@ -82,11 +87,6 @@ public class HTTPMinaServer extends XConfigurableObject  {
            this.requestHandler = requestHandler;
     }
 
-    org.apache.log4j.Logger logger = Logger.getLogger(HTTPMinaServer.class);
-    org.apache.log4j.Logger rlogger = Logger.getRootLogger();
-
-    int serverPort = 1001;
-    int n_threads = 16;
 
     private final ExecutorService service = Executors.newSingleThreadExecutor(
             new ThreadFactoryBuilder()

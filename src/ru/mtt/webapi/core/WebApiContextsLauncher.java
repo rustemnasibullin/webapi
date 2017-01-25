@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.log4j.Logger;
 
+import ru.mtt.rservice.core.SystemLogger;
 import ru.mtt.webapi.utils.XUtils;
 
 /**
@@ -225,6 +226,9 @@ public class WebApiContextsLauncher  extends Thread {
                     logger.error("failed to stop context " + context.getDisplayName(), e);
                 }
             }
+            
+            SystemLogger.getInstance().warn("stop");
+            
             if (shutdownSSocket != null)
                 try
                 {

@@ -18,6 +18,8 @@ import ru.mtt.rservice.core.Quantil;
 public interface WebApiDispatcherMBean {
     
    
+    public static final double _AVFACTOR_MIN = 0.78;
+   
     public long getLastRequestTime();
     public long getMaxRequestTime();
     public void resetMaxRequestTime();

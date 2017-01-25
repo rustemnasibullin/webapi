@@ -32,7 +32,14 @@
     <route id="WebAPIManager">
       <from uri="snmp:0.0.0.0:2762?protocol=udp&amp;type=TRAP"/>
       <log loggingLevel="INFO" 
-           message="test"/>
+           message="SNMP Trap Error"/>
+      <bean ref="SNMPProcessor" method="process"/>
+    </route>
+
+    <route id="WebAPIManagerCP">
+      <from uri="jetty:http://0.0.0.0:12762" />
+      <log loggingLevel="INFO" 
+           message="REST Request error"/>
       <bean ref="SNMPProcessor" method="process"/>
     </route>
 

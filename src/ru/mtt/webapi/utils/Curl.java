@@ -84,11 +84,9 @@ public class Curl extends Properties  {
     public static final String CURLOPT_METHOD = "CURLOPT_METHOD";
     public static final String CURLOPT_POSTFIELDS = "CURLOPT_POSTFIELDS";
     public static final String CURLOPT_AUTHORIZATION = "CURLOPT_AUTHORIZATION";
-    
-
+    public static final String GET = "GET";
+    public static final String POST = "POST";
     Socket socket =  null; 
-    
-
 
     public PostMethod factory4PostM(String serviceUrl, String data) {
     PostMethod post = new PostMethod(serviceUrl);
