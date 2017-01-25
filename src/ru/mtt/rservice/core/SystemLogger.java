@@ -45,7 +45,7 @@ public class SystemLogger extends Properties {
                    for (;;) {
                         try {  
                           Thread.currentThread().sleep (tick*1000);
-                          WebApiDispatcherMBean dispatcher = (WebApiDispatcherMBean) WebApiContextsLauncher.findBean ("");  
+                          WebApiDispatcherMBean dispatcher = (WebApiDispatcherMBean) WebApiContextsLauncher.findBean ("WebApiDispatcher");  
                           double avFactor = dispatcher.getAvailabilityFactor(); 
                           if (dispatcher != null) {   
                               if (avFactor<WebApiDispatcherMBean._AVFACTOR_MIN) warn("introuble");
