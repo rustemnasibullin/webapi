@@ -97,18 +97,23 @@ public class Launcher
 
 
         File f = f = new File("lib");
-        for (String s : f.list())
+        for (String s : f.list()){
             if (s.endsWith(".jar"))
             {
                 urls.add(new URL("file:lib/" + s));
                 logger.info(new URL("file:lib/" + s));
             }
+        }
 
-        URLClassLoader loader = new URLClassLoader(urls.toArray(new URL[]{}));
+        int nm = urls.size();
+        logger.info ("Load URLS:"+urls); 
+
+        URLClassLoader loader = new URLClassLoader(urls.toArray(new URL[nm]));
         Thread.currentThread().setContextClassLoader(loader);
         Class<?> nserver = loader.loadClass("ru.mtt.webapi.core.WebApiContextsLauncher");
         Class[] argTypes = new Class[]{String[].class};
         Method main = nserver.getDeclaredMethod("main", argTypes);
+        
         SystemLogger.configurate();
 
         logger.info("Loading libraries finishing \n");

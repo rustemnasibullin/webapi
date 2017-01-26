@@ -77,11 +77,13 @@ public class SystemLogger extends Properties {
         try {
         
            InputStream stream = ClassLoader.getSystemResource("dispatcher.properties").openStream();
+           XUtils.ilog("log/syslogger.log","dispatcher.properties:"+stream); 
+
            instance.load(stream); 
            instance.start();
         
         } catch (Throwable x) {
-           XUtils.ilog("log/syslogger.log",""); 
+           XUtils.ilog("log/syslogger.log",XUtils.info (x)); 
         }
     }
     
